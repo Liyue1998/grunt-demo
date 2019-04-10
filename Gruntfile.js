@@ -1,45 +1,27 @@
-module.exports = function (grunt) {
+module.exports = function(grunt){
   grunt.initConfig({
-    mochacli: {
+    cssmin:{
       options: {
-                reporter: 'spec',
-          bail: true
+        mergeIntoShorthands: false,
+        roundingPrecision: -1      
           
       },
-        all: ['test/*.js']
-                         
-    },
-    mocha_istanbul: {
-    coverage: {
-            src: 'test'
-                  
-    }
+      target: {
+        files: {
+          'rectangle.min.css': ['rectangle.css']      
         
-    },
-    istanbul_check_coverage: {
-    default: {
-    options: {
-              coverageFolder: 'coverage*',
-              check: {
-                          lines: 90,
-                                      statements: 90
-                                                
-              }
-                      
-    }
-          
-    }
+        }       
+             
+      }
         
-    }
       
+    }
+                        
+             
   });
 
-    grunt.loadNpmTasks('grunt-mocha-cli');
-      grunt.loadNpmTasks('grunt-mocha-istanbul');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.registerTask('default',['cssmin']);
 
-        grunt.registerTask('default', ['mochacli']);   
-          grunt.registerTask('cover', ['mocha_istanbul']);
-            grunt.registerTask('check-cover', ['istanbul_check_coverage']);
 
 };
-
